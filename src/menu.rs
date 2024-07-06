@@ -15,6 +15,7 @@ impl Plugin for MenuPlugin {
     }
 }
 
+// Marker trait for every menu component
 #[derive(Component)]
 struct Menu;
 
@@ -47,7 +48,7 @@ fn setup_menu(mut commands: Commands, textures: Res<ImageAssets>) {
                 "Play",
                 TextStyle { 
                     font_size: 40., // Maybe percentage? 
-                    color: Color::rgb(0.9, 0.9, 0.9),
+                    color: Color::srgb(0.9, 0.9, 0.9),
                     ..default()
                 }
             ));
@@ -91,7 +92,7 @@ fn setup_menu(mut commands: Commands, textures: Res<ImageAssets>) {
                 "Made by Barry on Bevy",
                 TextStyle {
                     font_size: 15.,
-                    color: Color::rgb(0.9, 0.9, 0.9),
+                    color: Color::srgb(0.9, 0.9, 0.9),
                     ..default()
                 },
             ));
@@ -129,13 +130,13 @@ impl From<&BasicButtons> for ButtonColors {
     fn from(button_type: &BasicButtons) -> ButtonColors {
         match button_type {
             BasicButtons::SmallButton => ButtonColors {
-                normal: Color::rgba(0.5, 0.5, 0.8, 0.8),
-                hovered: Color::rgba(0.5, 0.5, 1., 0.8),
+                normal: Color::srgba(0.5, 0.5, 0.8, 0.8),
+                hovered: Color::srgba(0.5, 0.5, 1., 0.8),
                 ..default()
             },
             BasicButtons::MenuButton => ButtonColors {
-                normal: Color::rgb(0.3, 0.67, 0.67),
-                hovered: Color::rgb(0.3, 0.85, 0.85),
+                normal: Color::srgb(0.3, 0.67, 0.67),
+                hovered: Color::srgb(0.3, 0.85, 0.85),
                 ..default()
             }
         }

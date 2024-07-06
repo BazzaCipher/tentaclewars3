@@ -14,7 +14,10 @@ pub struct TickSpeed(f32);
 
 // The current level which we load when entering GameState::Playing
 #[derive(Resource, Default, Debug)]
-pub struct CurrentLevel(usize);
+pub struct CurrentLevel {
+    index: usize,
+    id: Option<Entity>,
+}
 
 impl fmt::Display for CurrentLevel {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
@@ -41,12 +44,12 @@ impl Plugin for LevelsPlugin {
 
 fn load_level(
     mut commands: Commands,
-    current_level: Res<CurrentLevel>,
+    mut current_level: ResMut<CurrentLevel>,
     levels: Res<LevelsAssets>,
     mut next_state: ResMut<NextState<GameState>>,
 ) {
     // We cannot continue without a level selected
-    if current_level.0 == 0 { 
+    if current_level.index == 0 { 
         warn!("No level selected; returning to menu");
         next_state.set(GameState::Menu);
     }
@@ -60,11 +63,15 @@ fn load_level(
         return;
     };
 
-    start_gametick(&mut commands);
-    commands.spawn(SceneBundle {
+    // Spawn the scene and obtain the id, allowing easy access later
+    // without any marker component
+    let scene_id = commands.spawn(SceneBundle {
         scene: level.downcast_ref::<Handle<Scene>>().unwrap().clone(),
         ..default()
-    });
+    }).id();
+    current_level.id = Some(scene_id);
+
+    start_gametick(&mut commands);
 }
 
 // Cleans up active levels (which have the SceneInstance component by def)
@@ -72,6 +79,7 @@ fn cleanup_active_levels(query: Query<Entity, With<SceneInstance>>, mut commands
     for scene in &query {
         commands.entity(scene).despawn_recursive();
     }
+    cleanup_gametick(commands);
 }
 
 // Start game with default speed

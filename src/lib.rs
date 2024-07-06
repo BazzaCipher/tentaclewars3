@@ -5,14 +5,14 @@
 mod loading;
 mod menu;
 mod levels;
+mod game;
 // mod audio;
-// mod actions;
 
 use crate::loading::LoadingPlugin;
 use crate::menu::MenuPlugin;
 use crate::levels::LevelsPlugin;
+use crate::game::CorePlugin;
 // use crate::audio::InternalAudioPlugin;
-// use crate::actions::ActionsPlugin;
 
 use bevy::app::App;
 use bevy::prelude::*;
@@ -40,7 +40,7 @@ impl Plugin for GamePlugin {
             LoadingPlugin,
             MenuPlugin,
             LevelsPlugin,
-            // ActionsPlugin,
+            CorePlugin,
             // InternalAudioPlugin,
         ));
 
@@ -54,31 +54,6 @@ impl Plugin for GamePlugin {
     }
 }
 
-// pub struct BiocellPlugin;
-//
-// #[derive(Component)]
-// pub struct Biocell;
-//
-// // Animation indices, doesn't handle itself
-// #[derive(Component)]
-// struct AnimationIndices {
-//     first: usize,
-//     last: usize
-// }
-//
-// #[derive(Component, Deref, DerefMut)]
-// struct AnimationTimer(Timer);
-//
-// /***
-//  *
-//  * This plugin handles the movement behaviour of biocells
-//  */
-// impl Plugin for BiocellPlugin {
-//     fn build(&self, app: &mut App) {
-//         // app.add_systems(Update, );
-//     }
-// }
-//
 // // Animates all sprites including updating the timer and increasing texture atlas
 // fn animate_sprite(
 //     time: Res<Time>,
