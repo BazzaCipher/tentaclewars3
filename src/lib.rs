@@ -30,8 +30,6 @@ pub enum GameState {
     Menu,
     // During this state the gameplay logic is executed
     Playing,
-    // Here the menu is drawn, waiting for player interaction allowing pauses
-    Paused,
 }
 
 pub struct GamePlugin;

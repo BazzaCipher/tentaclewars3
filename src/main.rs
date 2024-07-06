@@ -3,14 +3,14 @@
 
 use bevy::{prelude::*, asset::AssetMetaCheck};
 
-use crate::GamePlugin;
+use tentaclewars3::GamePlugin;
 
 const DIMENSIONS: (usize, usize) = (1920, 1080);
 
 fn main() {
     App::new()
-        .insert_resource(Msaa::Off)
-        .insert_resource(AssetMetaCheck::Never)
+        // .insert_resource(Msaa::Off)
+        // .insert_resource(AssetMetaCheck::Never)
         .insert_resource(ClearColor(Color::rgb(0.4, 0.4, 0.4)))
         .add_plugins(DefaultPlugins
             .set(ImagePlugin::default_nearest())

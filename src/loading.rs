@@ -36,12 +36,12 @@ pub struct ImageAssets {
 // These are where the levels are able to be accessed. Because
 // a hashmap cannot be a resource, I have resorted to the explicit promise
 // of each level being named `level${a}` where a is a number from 1 of usize
-#[derive(AssetCollection, Resource)]
+#[derive(AssetCollection, Resource, Reflect)]
 pub struct LevelsAssets {
-    #[asset(path = "scenes/level1.scn.ron")]
-    level1: Handle<Scene>,
-    #[asset(path = "scenes/level2.scn.ron")]
-    level2: Handle<Scene>,
+    // #[asset(path = "scenes/level1.scn.ron")]
+    // pub level1: Handle<Scene>,
+    // #[asset(path = "scenes/level2.scn.ron")]
+    // pub level2: Handle<Scene>,
 }
 
 // Menu scenes, to be applied individually or on top
