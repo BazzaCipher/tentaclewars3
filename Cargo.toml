@@ -1,0 +1,22 @@
+[package]
+name = "tentaclewars3"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+bevy = { version = "0.14.0", features = ["dynamic_linking"] }
+# remove dynamic linking before game release
+bevy_asset_loader = "0.21.0"
+webbrowser = "1.0.1"
+
+[workspace]
+resolver = "2"
+
+[profile.dev]
+opt-level = 1
+
+[profile.dev.package."*"]
+opt-level = 3
+
